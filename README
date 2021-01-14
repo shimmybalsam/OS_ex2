@@ -1,0 +1,46 @@
+naamagl, shimmy10
+Naama Glazer (307880971), Shimmy Balsam (204693352)
+EX: 2
+
+FILES:
+uthreads.cpp -- threads management library
+thread.h -- thread object
+sleeping_threads_list.h -- sleeping threads library
+sleeping_threads_list.cpp -- sleeping threads library implementation
+Makefile -- compiles the program, generates the static libuthreads.a library
+README -- this file.
+
+
+ANSWERS:
+
+1. In general, one would use user-level threads when wanting to split a single process' runtime
+into separate threads, allowing better than linear run, without a trap to switch to the kernel mode.
+This is due to the fact that akk user-level threads which are part of the same process share
+global elements and certain memory.
+
+
+2. Advantages: each tab runs autonomously, as in has complete control of all its memory/arguments
+without sharing with others, therefor does'nt have to worry about outsiders changing elements and
+doesn't have to worry about errors caused in other tabs which won't effect it.
+
+    Disadvatages: The overhead of creating a new process each time is very large, causing a much slower
+run time rather than switching between threads in the same process. Also, having no shared
+memory/elements causes no opportunity for sharing information which may have allowed "saving time".
+
+
+3. At first the keyboard sends a hardware interrupt (of I/O) to the CPU causing a trap to kernel
+mode which in turn sends a software interrupt to the shell with given pid (in our case 26091,
+the pid of the Shotwell app) then a signal telling the app to exit gracefully.
+
+
+4. The real time is the absolute time that a process/thread appears to be running,
+as in the "user's time".
+For example, if I want to set an alarm clock for 3 minutes from now in my actual life, I want the
+clock to refer to the real time.
+The virtual time is the relative time the process/thread runs amongst all other processes/threads
+running.
+For example, if I want my python program to try to calculate something for 3 minutes until
+'giving up' then I want it to actually try for 3 minutes, regardless of any other processes running,
+meaning it might take much more than 3 minutes total in real time till 'giving up', but my specific
+process ran for only 3 minutes total virtual time.
+
